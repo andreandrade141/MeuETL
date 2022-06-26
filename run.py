@@ -1,14 +1,10 @@
-import json
 from operation import ApiScrape
 
 
 def main() -> None:
     client = ApiScrape(url='https://www.abibliadigital.com.br/api/books')
 
-    client.execute(quantity=15)
-
-    client.upload(f_name='')
-    pass
+    client.execute(quantity=50, f_name='extract')
 
 
 if __name__ == '__main__':
