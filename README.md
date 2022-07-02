@@ -12,3 +12,4 @@ Definir um valor para quantidade e executar run.py
 
 1. requests
 2. csv
+3. pprint
