@@ -8,24 +8,26 @@ class ApiScrape():
     def __init__(self, url: str) -> None:
         self.url = url
 
-    def execute(self, quantity: int,  f_name: str) -> None:
-        c = 0
+    def request_data(self) -> None:
         r = requests.get(self.url)
-        data = r.json()
+        self.data = r.json()
+
+    def write_csvfile(self, quantity: int, f_name: int) -> None:
+        c = 0
         with open(f_name + '.' + 'csv', 'a') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(['Abreviação', 'Autor', 'Capítulos',
                              'Grupo', 'Nome', 'Testamento'])
             for c in range(quantity):
-                writer.writerow([data[c]['abbrev'], data[c]['author'],
-                                 data[c]['chapters'], data[c]['group'],
-                                 data[c]['name'], data[c]['testament']])
-            csvfile.close()
+                writer.writerow([self.data[c]['abbrev'], self.data[c]['author'],
+                                 self.data[c]['chapters'], self.data[c]['group'],
+                                 self.data[c]['name'], self.data[c]['testament']])
 
     def query_by_book(self, book: str) -> None:
         with open('extract.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
-            pprint('-----------------------------------------------------')
+            pprint(
+                '-----------------------------------------------------')
             pprint(f'Livros com o nome de: {book}')
             for row in reader:
                 try:
@@ -37,7 +39,8 @@ class ApiScrape():
     def query_by_author(self, author: str) -> None:
         with open('extract.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
-            pprint('-----------------------------------------------------')
+            pprint(
+                '-----------------------------------------------------')
             pprint(f'Livros escritos por: {author}')
             for row in reader:
                 try:
@@ -45,3 +48,7 @@ class ApiScrape():
                         pprint(row)
                 except ValueError:
                     raise ValueError('Autor não encontrado')
+
+    def execute(self, quantity: int,  f_name: str) -> None:
+        self.request_data()
+        self.write_csvfile(quantity, f_name)
