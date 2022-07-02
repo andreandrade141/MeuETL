@@ -9,7 +9,6 @@ class ApiScrape():
         self.url = url
 
     def execute(self, quantity: int,  f_name: str) -> None:
-        content = []
         c = 0
         r = requests.get(self.url)
         data = r.json()
@@ -33,7 +32,7 @@ class ApiScrape():
                     if row[4] == book:
                         pprint(row)
                 except ValueError:
-                    raise ValueError('Autor não encontrado')
+                    raise ValueError('Livro não encontrado')
 
     def query_by_author(self, author: str) -> None:
         with open('extract.csv', 'r') as csvfile:
