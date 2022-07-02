@@ -1,6 +1,8 @@
 import csv
 import requests
 
+from pprint import pprint
+
 
 class ApiScrape():
     def __init__(self, url: str) -> None:
@@ -20,4 +22,27 @@ class ApiScrape():
                                  data[c]['chapters'], data[c]['group'],
                                  data[c]['name'], data[c]['testament']])
             csvfile.close()
-        pass
+
+    def query_by_book(self, book: str) -> None:
+        with open('extract.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            pprint('-----------------------------------------------------')
+            pprint(f'Livros com o nome de: {book}')
+            for row in reader:
+                try:
+                    if row[4] == book:
+                        pprint(row)
+                except ValueError:
+                    raise ValueError('Autor não encontrado')
+
+    def query_by_author(self, author: str) -> None:
+        with open('extract.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            pprint('-----------------------------------------------------')
+            pprint(f'Livros escritos por: {author}')
+            for row in reader:
+                try:
+                    if row[1] == author:
+                        pprint(row)
+                except ValueError:
+                    raise ValueError('Autor não encontrado')

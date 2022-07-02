@@ -6,6 +6,9 @@ def main() -> None:
 
     client.execute(quantity=50, f_name='extract')
 
+    client.query_by_book('Rute')
+    client.query_by_author('Samuel')
+
 
 if __name__ == '__main__':
     main()
