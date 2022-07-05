@@ -6,7 +6,9 @@ Busca os livros da biblia em uma api e retorna uma quantidade determinada na fun
 
 ## Execução
 
-Definir um valor para quantidade e executar run.py
+A execução é feita através de linha de comando com args para configurar algumas consultas:
+  Utilização Básica: `run.py <qtd> <fname> <book> <author>`
+  Todos os argumentos são obrigatórios na versão corrente: 54ecb6b.
 
 ## Dependências
 
